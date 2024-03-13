@@ -1,10 +1,13 @@
 import json
 
-string_as_json_format = '{"answer":"Hello, user"}'
-obj = json.loads(string_as_json_format) #парсим строку и кладем ее в переменную obj как словарь
-key = 'answer2'
+json_text = '{"messages":' \
+            '[{"message":"This is the first message",' \
+            '"timestamp":"2021-06-04 16:40:53"},' \
+            '{"message":"And this is a second message",' \
+            '"timestamp":"2021-06-04 16:41:01"}]}'
 
-if key in obj:
-    print(obj['answer']) #печатаем значение по ключу 'answer'
-else:
-    print(f"Ключа {key} в json нет")
+# парсим строку и кладем ее в переменную obj как словарь
+obj = json.loads(json_text)
+
+second_message = obj['messages'][1]['message']
+print(second_message)
