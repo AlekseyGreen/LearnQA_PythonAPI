@@ -1,6 +1,6 @@
 import requests
 
-payload = {"name": "Aleksey"}
-response = requests.get("https://playground.learnqa.ru/api/hello",
-                        params=payload)
+response = requests.post("https://playground.learnqa.ru/api/check_type",
+                         data= {'name': 'Aleskey'})
+
 print(response.text)
