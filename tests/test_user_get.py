@@ -29,3 +29,30 @@ class TestUserGet(BaseCase):
         expected_fields = ['username', 'email', 'firstName', 'lastName']
         Assertions.assert_json_has_keys(response2, expected_fields)
 
+    def test_get_user_details_auth_as_different_user(self):
+        data = {
+            'email': 'vinkotov@example.com',
+            'password': '1234'
+        }
+
+        # Авторизуем пользователя
+        response_auth = requests.post(
+            'https://playground.learnqa.ru/api/user/login', data=data)
+        auth_sid = self.get_cookie(response_auth, 'auth_sid')
+        token = self.get_header(response_auth, "x-csrf-token")
+
+        # Получаем ID другого пользователя
+        user_id_other_user = 3
+
+        # Делаем запрос для получения данных другого пользователя
+        response_other_user_data = requests.get(
+            f'https://playground.learnqa.ru/api/user/{user_id_other_user}',
+            headers={"x-csrf-token": token},
+            cookies={'auth_sid': auth_sid})
+
+        # Проверяем, что в ответе есть только username
+        expected_fields = ['username']
+        Assertions.assert_json_has_keys(response_other_user_data,
+                                        expected_fields)
+
+
