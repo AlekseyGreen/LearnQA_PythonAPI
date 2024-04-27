@@ -17,8 +17,8 @@ class MyRequests():
         return MyRequests._send(url, data, headers, cookies, 'DELETE')
 
     @staticmethod
-    def _send(usl: str, data: dict, headers: dict, cookies: dict, method: str):
-        url = f'https://playground.learnqa.ru/api{}'
+    def _send(url: str, data: dict, headers: dict, cookies: dict, method: str):
+        url = f'https://playground.learnqa.ru/api{url}'
 
         if headers is None:
             headers = {}
