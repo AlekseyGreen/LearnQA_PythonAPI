@@ -59,3 +59,11 @@ class TestUserAuth(BaseCase):
             0,
             f'user is authorised with condition {condition}'
         )
+
+        @allure.severity(allure.severity_level.CRITICAL)
+        def check_error_status():
+            if response2.status_code != 200:
+                raise AssertionError(
+                    f"Expected status code 200, but got {response2.status_code}")
+
+        check_error_status()
